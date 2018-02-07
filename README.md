@@ -45,7 +45,7 @@ R4ML provides various out of the box tools, and preprocessing utility for doing 
 
 * [IBM Data Science Experience](https://www.ibm.com/bs-en/marketplace/data-science-experience): Analyze data using RStudio, Jupyter, and Python in a configured, collaborative environment that includes IBM value-adds, such as managed Spark.
 * [IBM Analytics for Apache Spark](https://console.ng.bluemix.net/catalog/services/apache-spark): An open-source cluster computing framework optimized for extremely fast and large scale data processing.
-* [Bluemix Object Storage](https://console.bluemix.net/catalog/services/object-storage): Build and deliver cost effective apps and services with high reliability and speed to market in an unstructured cloud data store.
+* [Cloud Object Storage](https://console.bluemix.net/catalog/services/object-storage): Build and deliver cost effective apps and services with high reliability and speed to market in an unstructured cloud data store.
 
 ## Featured Technologies
 
@@ -95,10 +95,10 @@ Follow these steps to setup and run this developer journey. These steps are desc
 ## 1. Sign up for the Data Science Experience
 
 Sign up for IBM's [Data Science Experience](http://datascience.ibm.com/). 
-By signing up for the Data Science Experience, two services will be created in your Bluemix account: ``DSX-Spark`` and ``DSX-ObjectStore``. If these services do not exist, or if you are already using them for some other application, you will need to create new instances.
+By signing up for the Data Science Experience, two services will be created in your IBM Cloud account: ``DSX-Spark`` and ``DSX-ObjectStore``. If these services do not exist, or if you are already using them for some other application, you will need to create new instances.
 
 To create these services:
-* Login or create your Bluemix [Bluemix](http://bluemix.net) account.
+* Login or create your [IBM Cloud](http://bluemix.net) account.
 * Create your Spark service by selecting the service type [Apache Spark](https://console.bluemix.net/catalog/services/apache-spark).If the name has not already been used, name your service ``DSX-Spark`` so that you can keep track of it.
 * Create your Object Storage service by selecting the service type [Cloud Object Storage](https://console.bluemix.net/catalog/infrastructure/object-storage-group). If the name has not already been used, name your service ``DSX-ObjectStorage`` so that you can keep track of it.
 
