@@ -6,11 +6,11 @@ When the reader has completed this Code Pattern, they will understand how to:
 
 * Use [Jupyter Notebooks](http://jupyter.org/) to load, visualize, and analyze data.
 * Run Notebooks in [IBM Watson Studio](https://dataplatform.ibm.com).
-* Leverage [R4ML](https://github.com/SparkTC/r4ml) to conduct data preparation and exploratory analysis with big data.
+* Leverage [R4ML](https://github.com/CODAIT/r4ml) to conduct data preparation and exploratory analysis with big data.
 
 The Intended audience for this Code Pattern is data scientists who wish to perform scalable feature engineering and data exploration.
 
-This specific Code Pattern will provide an end-to-end example to demonstrate the ease and power of R4ML in implementing data preprocessing and data exploration. R4ML provides various out-of-the-box tools, and a preprocessing utility for doing the feature engineering. It also provides utilities to sample data and do exploratory analysis. For more information about additional R4ML functionality, support, documentation, and roadmap, please vist [R4ML](https://github.com/SparkTC/r4ml)
+This specific Code Pattern will provide an end-to-end example to demonstrate the ease and power of R4ML in implementing data preprocessing and data exploration. R4ML provides various out-of-the-box tools, and a preprocessing utility for doing the feature engineering. It also provides utilities to sample data and do exploratory analysis. For more information about additional R4ML functionality, support, documentation, and roadmap, please vist [R4ML](https://github.com/CODAIT/r4ml)
 
 This Code Pattern will walk the user through the following conceptual steps:
 
@@ -43,7 +43,7 @@ This Code Pattern will walk the user through the following conceptual steps:
 ## Featured Technologies
 
 * [Data Science](https://medium.com/ibm-data-science-experience/): Systems and scientific methods to analyze structured and unstructured data in order to extract knowledge and insights.
-* [R4ML](https://github.com/SparkTC/r4ml): R4ML is a scalable, hybrid approach to ML/Stats using R, Apache SystemML, and Apache Spark.
+* [R4ML](https://github.com/CODAIT/r4ml): R4ML is a scalable, hybrid approach to ML/Stats using R, Apache SystemML, and Apache Spark.
 
 # Steps
 
