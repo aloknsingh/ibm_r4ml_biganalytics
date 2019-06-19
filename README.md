@@ -1,4 +1,5 @@
 # Big Data Preparation and Exploration using R4ML
+
 *Read this in other languages: [한국어](README-ko.md).*
 
 In this Code Pattern we will use R4ML, a scalable R package, running on IBM Watson Studio to perform various Machine Learning exercises. For those users who are unfamiliar with Watson Studio, it is an interactive, collaborative, cloud-based environment where data scientists, developers, and others interested in data science can use tools (e.g., RStudio, Jupyter Notebooks, Spark, etc.) to collaborate, share, and gather insight from their data.
@@ -20,12 +21,17 @@ This Code Pattern will walk the user through the following conceptual steps:
 * How to use your favorite R utilities on big data.
 * Highlights the steps necessary to complete data preparation and exploration.
 
-### Source of data
+#### Source of data
 
-- We will use the Airline On-Time Statistics and Delay Causes from [RITA](https://www.transportation.gov/research-technology). A 1% sample of the "airline" dataset is available [here](http://stat-computing.org/dataexpo/2009/the-data.html). All of the data is in the      public domain.
-- For this Code Pattern, we will use a subset of the above dataset, which is shipped with R4ML
-- This Code Pattern can also work with the larger RITA dataset.
- 
+* We will use the Airline On-Time Statistics and Delay Causes from [RITA](https://www.transportation.gov/research-technology). A 1% sample of the "airline" dataset is available [here](http://stat-computing.org/dataexpo/2009/the-data.html). All of the data is in the      public domain.
+* For this Code Pattern, we will use a subset of the above dataset, which is shipped with R4ML
+* This Code Pattern can also work with the larger RITA dataset.
+
+#### Notebooks
+
+* [R4ML_Introduction_Exploratory_DataAnalysis.ipynb](notebooks/R4ML_Introduction_Exploratory_DataAnalysis.ipynb): for exploring the data we will be using
+* [R4ML_Data_Preprocessing_and_Dimension_Reduction.ipynb](notebooks/R4ML_Data_Preprocessing_and_Dimension_Reduction.ipynb):  performs data pre-processing and dimension reduction analysis.
+
 ## Flow
 
 ![](doc/source/images/architecture.png)
@@ -46,86 +52,54 @@ This Code Pattern will walk the user through the following conceptual steps:
 * [Data Science](https://medium.com/ibm-data-science-experience/): Systems and scientific methods to analyze structured and unstructured data in order to extract knowledge and insights.
 * [R4ML](https://github.com/CODAIT/r4ml): R4ML is a scalable, hybrid approach to ML/Stats using R, Apache SystemML, and Apache Spark.
 
-# Steps
+## Steps
 
-This Code Pattern consists of following activities:
+1. [Create a new Watson Studio project](#1-create-a-new-watson-studio-project)
+2. [Create the notebooks](#2-create-the-notebooks)
+3. [Run the notebooks](#3-run-the-notebooks)
+4. [Save and Share](#4-save-and-share)
+5. [Explore and Analyze the Data](#5-explore-and-analyze-the-data)
 
-* [Run Jupyter notebooks in the IBM Watson Studio](#run-jupyter-notebooks-in-the-ibm-watson-studio).
-* [Explore and Analyze the Data](#explore-and-analyze-the-data).
+### 1. Create a new Watson Studio project
 
-## Run Jupyter notebooks in the IBM Watson Studio
+* Log into IBM's [Watson Studio](https://dataplatform.cloud.ibm.com). Once in, you'll land on the dashboard.
 
-1. [Sign up for the Watson Studio](#1-sign-up-for-the-watson-studio)
-2. [Create a new Watson Studio project](#2-create-a-new-watson-studio-project)
-3. [Create the Spark service](#3-create-the-spark-service)
-4. [Create the notebooks](#4-create-the-notebooks)
-5. [Run the notebooks](#5-run-the-notebooks)
-6. [Save and Share](#6-save-and-share)
+* Create a new project by clicking `+ New project` and choosing `Data Science`:
 
-### 1. Sign up for the Watson Studio
+  ![studio project](https://raw.githubusercontent.com/IBM/pattern-utils/master/watson-studio/new-project-data-science.png)
 
-Log in or sign up for IBM's [Watson Studio](https://dataplatform.cloud.ibm.com/).
+* Enter a name for the project name and click `Create`.
 
-> Note: if you would prefer to skip the remaining Watson Studio set-up steps and just follow along by viewing the completed Notebook, simply:
-> * View the completed notebooks and its outputs, as is. In this Code Pattern, there are two notebooks. The first [notebook](https://github.com/IBM/r4ml-on-watson-studio/blob/master/notebooks/R4ML_Introduction_Exploratory_DataAnalysis.ipynb) is for exploring, and the second [notebook](https://github.com/IBM/r4ml-on-watson-studio/blob/master/notebooks/R4ML_Data_Preprocessing_and_Dimension_Reduction.ipynb) performs data pre-processing and dimension reduction analysis. 
-> * While viewing the notebook, you can optionally download it to store for future use.
-> * When complete, continue this code pattern by jumping ahead to the [Explore and Analyze the Data](#explore-and-analyze-the-data) section.
+* **NOTE**: By creating a project in Watson Studio a free tier `Object Storage` service and `Watson Machine Learning` service will be created in your IBM Cloud account. Select the `Free` storage type to avoid fees.
 
-### 2. Create a new Watson Studio project
-
-* Select the `New Project` option from the Watson Studio landing page and choose the `Data Science` option.
-
-![](https://raw.githubusercontent.com/IBM/pattern-images/master/watson-studio/project_choices.png)
-
-* To create a project in Watson Studio, give the project a name and either create a new `Cloud Object Storage` service or select an existing one from your IBM Cloud account.
-
-![](https://raw.githubusercontent.com/IBM/pattern-images/master/watson-studio/new_project.png)
+  ![studio-new-project](https://raw.githubusercontent.com/IBM/pattern-utils/master/watson-studio/new-project-data-science-name.png)
 
 * Upon a successful project creation, you are taken to a dashboard view of your project. Take note of the `Assets` and `Settings` tabs, we'll be using them to associate our project with any external assets (datasets and notebooks) and any IBM cloud services.
 
-![](https://raw.githubusercontent.com/IBM/pattern-images/master/watson-studio/project_dashboard.png)
+  ![studio-project-dashboard](https://raw.githubusercontent.com/IBM/pattern-utils/master/watson-studio/overview-empty.png)
 
-## 3. Create the Spark service
+### 2. Create the Notebooks
 
-* In your project go to the `Settings` tab, scroll down to `Associated Services` and choose `+ Add service` -> `Spark`
+* From the new project `Overview` panel, click `+ Add to project` on the top right and choose the `Notebook` asset type.
 
-![](https://raw.githubusercontent.com/IBM/pattern-images/master/watson-studio/add_service.png)
+![studio-project-dashboard](https://raw.githubusercontent.com/IBM/pattern-utils/master/watson-studio/add-assets-notebook.png)
 
-* Either choose and `Existing` Spark service, or create a `New` one
+* Fill in the following information:
 
-<img width="500" src="https://raw.githubusercontent.com/IBM/pattern-images/master/watson-studio/add_existing_spark_service.png">
+  * Select the `From URL` tab. [1]
+  * Enter a `Name` for the notebook and optionally a description. [2]
+  * Under `Notebook URL` provide the following url: [https://github.com/IBM/r4ml-on-watson-studio/blob/master/notebooks/R4ML_Introduction_Exploratory_DataAnalysis.ipynb](https://github.com/IBM/r4ml-on-watson-studio/blob/master/notebooks/R4ML_Introduction_Exploratory_DataAnalysis.ipynb) [3]
+  * For `Runtime` select the `Spark R 3.4` option. [4]
 
-### 4. Create the Notebooks
-
-* From the project dashboard view, click the `Assets` tab, click the `+ New notebook` button.
-
-![](https://raw.githubusercontent.com/IBM/pattern-images/master/watson-studio/new_notebook.png)
-
-* Give your notebook a name and select your desired runtime, in this case we'll be using the associated Spark runtime.
-
-> Note: For this Code Pattern, after setting the run-time to your `Spark` instance, set language to `R`
-
-![](https://raw.githubusercontent.com/IBM/pattern-images/master/watson-studio/notebook_spark.png)
-
-* Now select the `From URL` tab to specify the URL to the notebook in this repository.
-
-![](https://raw.githubusercontent.com/IBM/pattern-images/master/watson-studio/notebook_with_url_spark.png)
-
-* Enter this URL:
-
-```
-https://github.com/IBM/r4ml-on-watson-studio/blob/master/notebooks/R4ML_Introduction_Exploratory_DataAnalysis.ipynb
-```
+  ![add notebook](https://github.com/IBM/pattern-utils/raw/master/watson-studio/notebook-create-url-spark-r34.png)
 
 * Click the `Create` button.
 
-* Repeat these steps for creating the second notebook, which has the URL:
+* Repeat these steps for the second notebook, which has the URL: [https://github.com/IBM/r4ml-on-watson-studio/blob/master/notebooks/R4ML_Data_Preprocessing_and_Dimension_Reduction.ipynb](https://github.com/IBM/r4ml-on-watson-studio/blob/master/notebooks/R4ML_Data_Preprocessing_and_Dimension_Reduction.ipynb)
 
-```
-https://github.com/IBM/r4ml-on-watson-studio/blob/master/notebooks/R4ML_Data_Preprocessing_and_Dimension_Reduction.ipynb
-```
+* **TIP:** Once successfully imported, the notebook should appear in the `Notebooks` section of the `Assets` tab.
 
-### 5. Run the notebooks
+### 3. Run the notebooks
 
 First run the exploratory nodebook first. Once Complete, run the data processing notebook.
 
@@ -155,7 +129,7 @@ There are several ways to execute the code cells in your notebook:
     panel. Here you can schedule your notebook to be executed once at some future
     time, or repeatedly at your specified interval.
 
-### 6. Save and Share
+### 4. Save and Share
 
 #### How to save your work:
 
@@ -181,7 +155,7 @@ options to specify exactly what you want shared from your notebook:
 * `All content, including code`: displays the notebook as is.
 * A variety of `download as` options are also available in the menu.
 
-## Explore and Analyze the Data
+### 5. Explore and Analyze the Data
 
 Both notebooks are well documented and will guide you through the exercise. Some of the main tasks that will be covered include:
 
@@ -215,7 +189,6 @@ The following screen-shots shows the correlation between various features of the
 
 ![Exploratory Analysis Correlation between various features](doc/source/images/r4ml-corr.png)
 
-
 The following screen-shots shows the output of the dimensionality reduction using PCA and how only 6 components of PCA carries 90% of information.
 
 ![Dimension Reduction using PCA](doc/source/images/r4ml-pca-dimred.png)
@@ -224,18 +197,16 @@ Awesome job following along! Now go try and take this further or apply it to a d
 
 ## Links
 
- - Watson Studio: https://datascience.ibm.com/docs/content/analyze-data/creating-notebooks.html.
- - Data: http://stat-computing.org/dataexpo/2009/the-data.html
+* [Data Set](http://stat-computing.org/dataexpo/2009/the-data.html)
 
-# Learn more
+## Learn more
 
 * **Data Analytics Code Patterns**: Enjoyed this Code Pattern? Check out our other [Data Analytics Code Patterns](https://developer.ibm.com/technologies/data-science/)
 * **AI and Data Code Pattern Playlist**: Bookmark our [playlist](https://www.youtube.com/playlist?list=PLzUbsvIyrNfknNewObx5N7uGZ5FKH0Fde) with all of our Code Pattern videos
 * **Watson Studio**: Master the art of data science with IBM's [Watson Studio](https://dataplatform.cloud.ibm.com/)
-* **Spark on IBM Cloud**: Need a Spark cluster? Create up to 30 Spark executors on IBM Cloud with our [Spark service](https://cloud.ibm.com/catalog/services/apache-spark)
 
-# License
+## License
 
-This code pattern is licensed under the Apache Software License, Version 2.  Separate third party code objects invoked within this code pattern are licensed by their respective providers pursuant to their own separate licenses. Contributions are subject to the Developer [Certificate of Origin, Version 1.1 (DCO)] (https://developercertificate.org/) and the [Apache Software License, Version 2] (http://www.apache.org/licenses/LICENSE-2.0.txt).
+This code pattern is licensed under the Apache License, Version 2. Separate third-party code objects invoked within this code pattern are licensed by their respective providers pursuant to their own separate licenses. Contributions are subject to the [Developer Certificate of Origin, Version 1.1](https://developercertificate.org/) and the [Apache License, Version 2](https://www.apache.org/licenses/LICENSE-2.0.txt).
 
-ASL FAQ link: http://www.apache.org/foundation/license-faq.html#WhatDoesItMEAN
+[Apache License FAQ](https://www.apache.org/foundation/license-faq.html#WhatDoesItMEAN)
